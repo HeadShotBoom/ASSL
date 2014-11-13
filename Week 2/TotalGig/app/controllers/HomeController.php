@@ -37,6 +37,11 @@ class HomeController extends BaseController {
             $user->username = Input::get('username');
             $user->password = Hash::make(Input::get('password'));
             $user->save();
+
+            Mail::send('users.mails.welcome', array('username'=>Input::get('username')), function($message){
+                $message->to(Input::get('email'), Input::get('username'))->subject('Email System Test');
+            });
+
             $theEmail = Input::get('email');
             return View::make('thanks')->with('theEmail', $theEmail);
         }

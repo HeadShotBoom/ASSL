@@ -41,6 +41,60 @@ class GigController extends BaseController{
             $gig->employee3 = Input::get('employee3');
             $gig->save();
 
+            if(Input::get('employee1') != null ){
+                if(Input::get('employee1') == 1){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }elseif(Input::get('employee1') == 2){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel2', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }elseif(Input::get('employee1') == 3){
+                        Mail::send('users.mails.gig', array('username'=>'Daniel3', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                            $message->to('DCarroll@fullsail.edu', 'Daniel Carroll')->subject('Youve Been Booked');
+                        });
+                }else{
+
+                }
+            }
+
+            if(Input::get('employee2') != null ){
+                if(Input::get('employee2') == 1){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }elseif(Input::get('employee2') == 2){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel2', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }elseif(Input::get('employee2') == 3){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel3', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('DCarroll@fullsail.edu', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }else{
+
+                }
+            }
+
+            if(Input::get('employee3') != null ){
+                if(Input::get('employee3') == 1){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }elseif(Input::get('employee3') == 2){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel2', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }elseif(Input::get('employee3') == 3){
+                    Mail::send('users.mails.gig', array('username'=>'Daniel3', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message){
+                        $message->to('DCarroll@fullsail.edu', 'Daniel Carroll')->subject('Youve Been Booked');
+                    });
+                }else{
+
+                }
+            }
+
             return Redirect::to('/')->with('message', 'Gig Created Successfully.');
         }
 
