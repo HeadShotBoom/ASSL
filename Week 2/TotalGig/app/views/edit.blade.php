@@ -50,7 +50,7 @@
     <br />
     <div class="small-12 medium-8 medium-push-2 columns">
         <label for="employee1">Employee 1</label>
-        <select name="employee1">
+        <select name="employee1" value="{{ $gig->employee1 }}">
             <option value="0"></option>
             <option value="1">Daniel</option>
             <option value="2">Jen</option>
@@ -64,7 +64,7 @@
     <br />
     <div class="small-12 medium-8 medium-push-2 columns">
         <label for="employee2">Employee 2</label>
-        <select name="employee2">
+        <select name="employee2" value="{{ $gig->employee2 }}">
             <option value="0"></option>
             <option value="1">Daniel</option>
             <option value="2">Jen</option>
@@ -78,7 +78,7 @@
     <br />
     <div class="small-12 medium-8 medium-push-2 columns">
         <label for="employee3">Employee 3</label>
-        <select name="employee3"">
+        <select name="employee3" value="{{ $gig->employee3 }}">
             <option value="0"></option>
             <option value="1">Daniel</option>
             <option value="2">Jen</option>
