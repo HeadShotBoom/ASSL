@@ -41,7 +41,7 @@
         <br />
         <div class="small-12 medium-8 medium-push-2 columns">
             <label for="gig_date">Gig Date</label>
-            <input name="gig_date" id="demo2" type="text" size="25"><a href="javascript:NewCal('demo2','ddmmmyyyy',true,12)"><img src="img/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+            <input name="gig_date" type="text" data-date-time data-nullable />
             @if($errors->has('gig_date'))
             <span class="error">{{ $errors->first('gig_date') }}</span>
             @endif

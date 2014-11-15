@@ -264,6 +264,4 @@ class GigController extends BaseController{
 
         return Redirect::to('/')->with('message', 'Gig Deleted.');
     }
-
-
 }

@@ -5,9 +5,22 @@
 	<title>Laravel PHP Framework</title>
     <link rel="stylesheet" href="{{ URL::asset('css/foundation.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ URL::asset('css/foundation-icons.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ URL::asset('css/foundation_calendar.css') }}" type="text/css" />
+    <script src="{{ URL::asset('js/vendor/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" type="text/css" />
     <script src="{{ URL::asset('js/vendor/modernizr.js') }}"></script>
-    <script src="{{ URL::asset('js/vendor/datetimepicker.js') }}"></script>
+    <script src="{{ URL::asset('js/vendor/jquery.js') }}"></script>
+    <script src="{{ URL::asset('js/foundation.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).foundation();
+        });
+    </script>
+    <script src="{{ URL::asset('js/vendor/date.js') }}"></script>
+    <script src="{{ URL::asset('js/vendor/foundation_calendar.js') }}"></script>
+    <script src="{{ URL::asset('js/vendor/date-helpers.js') }}"></script>
+    <script src="{{ URL::asset('js/vendor/string-helpers.js') }}"></script>
 </head>
 <body>
 
@@ -47,11 +60,6 @@
 
 @yield('content')
 
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/foundation.min.js"></script>
-    <script>
-        $(document).foundation();
-    </script>
+
 </body>
 </html>
