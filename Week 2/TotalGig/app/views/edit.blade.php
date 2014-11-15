@@ -6,7 +6,7 @@
 </div>
 
 <div class="row">
-<form action="{{ action('GigController@handleEdit') }}" method="post" role="form">
+<form action="{{ action('GigController@handleEdit') }}" method="post" role="form" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{{ $gig->id }}" />
     <div class="small-12 medium-8 medium-push-2 columns">
         <label for="gig_name">Gig Name</label>
@@ -88,6 +88,9 @@
         @if($errors->has('employee3'))
         <span class="error">{{ $errors->first('employee3') }}</span>
         @endif
+    </div>
+    <div class="small-12 medium-8 medium-push-2 columns">
+        <input type="file" name="fileToUpload" id="fileToUpload">
     </div>
     <div class="small-12 medium-5 medium-pull-5 columns">
     <input type="submit" value="Edit" class="btn btn-primary" />
