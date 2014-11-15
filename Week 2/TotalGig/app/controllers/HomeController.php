@@ -67,4 +67,8 @@ class HomeController extends BaseController {
         return View::make('logout');
     }
 
+    public function calendar(){
+        return View::make('calendar');
+    }
+
 }

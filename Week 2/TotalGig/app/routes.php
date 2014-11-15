@@ -20,6 +20,7 @@ Route::get('/delete/{gig}', 'GigController@delete');
 Route::get('/register', 'HomeController@register');
 Route::get('/login', 'HomeController@login');
 Route::get('/logout', 'HomeController@logout');
+Route::get('/calendar', 'HomeController@calendar');
 
 Route::post('/create', 'GigController@handleCreate');
 Route::post('/edit', 'GigController@handleEdit');
