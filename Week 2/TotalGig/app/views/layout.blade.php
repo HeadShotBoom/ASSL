@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/foundation-icons.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/foundation_calendar.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ URL::asset('css/foundation.calendar.css') }}" type="text/css" />
     <script src="{{ URL::asset('js/vendor/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}" type="text/css" />
     <script src="{{ URL::asset('js/vendor/modernizr.js') }}"></script>

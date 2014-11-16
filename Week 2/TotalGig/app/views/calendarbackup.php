@@ -11,8 +11,7 @@ $date =time () ;
 
 $day = date('d', $date) ;
 
-$month = date('m', $date);
-
+$month = date('m', $date) ;
 
 $year = date('Y', $date) ;
 
@@ -61,18 +60,14 @@ $days_in_month = cal_days_in_month(0, $month, $year) ;
 
 //Here we start building the table heads
 
-echo "<ul class='large-8 large-push-2 small-12 columns maincalendar'>";
+echo "<table border=1 width=294>";
 
-echo "<li class='title'> $title $year </li>";
-echo "<li class='mainday-header' >
-<div class='large-1 mainday'>Sun</div>
-        <div class='large-1 mainday'>Mon</div>
-        <div class='large-1 mainday'>Tue</div>
-        <div class='large-1 mainday'>Wed</div>
-        <div class='large-1 mainday'>Thu</div>
-        <div class='large-1 mainday'>Fri</div>
-        <div class='large-1 mainday'>Sat</div>
-</li>";
+echo "<tr><th colspan=7> $title $year </th></tr>";
+
+echo "<tr><td width=42>S</td><td width=42>M</td><td
+width=42>T</td><td width=42>W</td><td width=42>T</td><td
+width=42>F</td><td width=42>S</td></tr>";
+
 
 
 //This counts the days in the week, up to 7
@@ -81,7 +76,7 @@ $day_count = 1;
 
 
 
-echo "<li class='mainweek'>";
+echo "<tr>";
 
 //first we take care of those blank days
 
@@ -89,7 +84,7 @@ while ( $blank > 0 )
 
 {
 
-    echo "<div class='large-1 previous-month mainday'></div>";
+    echo "<td></td>";
 
     $blank = $blank-1;
 
@@ -101,14 +96,7 @@ while ( $blank > 0 )
 
 $day_num = 1;
 
-$allGigs = array();
 
-foreach($gig as $gig){
-    $gigdate = $gig->gig_date;
-    $strarr = str_split($gigdate, 2);
-    $gigday = $strarr[4];
-    $allGigs[intval($gigday)] = $gigday;
-}
 
 //count up the days, untill we've done all of them in the month
 
@@ -116,11 +104,7 @@ while ( $day_num <= $days_in_month )
 
 {
 
-    echo "<div class='large-1 mainday'>$day_num";
-        if(array_key_exists($day_num, $allGigs)) {
-            echo "<br /><a>$allGigs[$day_num]</a>";
-        }
-        echo "</div>";
+    echo "<td> $day_num </td>";
 
     $day_num++;
 
@@ -134,7 +118,7 @@ while ( $day_num <= $days_in_month )
 
     {
 
-        echo "</li><li class='mainweek'>";
+        echo "</tr><tr>";
 
         $day_count = 1;
 
@@ -148,14 +132,14 @@ while ( $day_count >1 && $day_count <=7 )
 
 {
 
-    echo "<li class='mainweek'> </li>";
+    echo "<td> </td>";
 
     $day_count++;
 
 }
 
 
-echo "</li></ul>";
+echo "</tr></table>";
 ?>
 
 @stop

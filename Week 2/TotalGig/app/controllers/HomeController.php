@@ -68,7 +68,8 @@ class HomeController extends BaseController {
     }
 
     public function calendar(){
-        return View::make('calendar');
+        $gig = Gig::all();
+        return View::make('calendar', compact('gig'));
     }
 
 }
