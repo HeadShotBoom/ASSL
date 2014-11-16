@@ -17,6 +17,7 @@ Route::get('/', 'GigController@index');
 Route::get('/create', 'GigController@create');
 Route::get('/edit/{gig}', 'GigController@edit');
 Route::get('/delete/{gig}', 'GigController@delete');
+Route::get('/view/{gig}', 'GigController@viewgig');
 Route::get('/register', 'HomeController@register');
 Route::get('/login', 'HomeController@login');
 Route::get('/logout', 'HomeController@logout');

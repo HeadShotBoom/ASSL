@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Laravel PHP Framework</title>
+	<title>TotalGig</title>
     <link rel="stylesheet" href="{{ URL::asset('css/foundation.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/foundation-icons.css') }}" type="text/css" />

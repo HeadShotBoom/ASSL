@@ -152,11 +152,18 @@ class GigController extends BaseController{
 
         if($validator->passes()){
 
-            $uploaddir = public_path() . '/uploads/';
-            $origionalfileName = pathinfo($uploaddir . ($_FILES['fileToUpload']['name']));
-            $newName = $origionalfileName['filename'] . str_random(25) . '.' . $origionalfileName['extension'];
-            $uploadfile = $uploaddir . $newName;
-            move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile);
+            if(! empty($_FILES)){
+//                echo "file";
+                $uploaddir = public_path() . '/uploads/';
+                $origionalfileName = pathinfo($uploaddir . ($_FILES['fileToUpload']['name']));
+                $newName = $origionalfileName['filename'] . str_random(25) . '.' . $origionalfileName['extension'];
+                $uploadfile = $uploaddir . $newName;
+                move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile);
+            }else{
+//                echo "no file";
+                $newName = $gig->file;
+            }
+
 
             $gig->gig_name = Input::get('gig_name');
             $gig->client_name = Input::get('client_name');
@@ -263,5 +270,13 @@ class GigController extends BaseController{
         $gig->delete();
 
         return Redirect::to('/')->with('message', 'Gig Deleted.');
+    }
+
+    public function viewgig(Gig $gig){
+        //Show the edit gig form
+        if(Auth::check()){
+            return View::make('singlegig', compact('gig'));
+        }
+        return View::make('failure');
     }
 }

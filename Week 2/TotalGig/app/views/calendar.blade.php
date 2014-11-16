@@ -53,8 +53,6 @@ switch($day_of_week){
 
 }
 
-
-
 //We then determine how many days are in the current month
 
 $days_in_month = cal_days_in_month(0, $month, $year) ;
@@ -101,13 +99,21 @@ while ( $blank > 0 )
 
 $day_num = 1;
 
-$allGigs = array();
+$namesforcal = array();
+$datesforcal = array();
+$idforcal = array();
 
 foreach($gig as $gig){
     $gigdate = $gig->gig_date;
     $strarr = str_split($gigdate, 2);
     $gigday = $strarr[4];
-    $allGigs[intval($gigday)] = $gigday;
+    $giginfo = array();
+    $giginfo[0] = $gig->gig_name;
+    $giginfo[1] = $gig->gig_date;
+    $giginfo[2] = $gig->id;
+    $namesforcal[intval($gigday)] = $giginfo[0];
+    $datesforcal[intval($gigday)] = $giginfo[1];
+    $idforcal[intval($gigday)] = $giginfo[2];
 }
 
 //count up the days, untill we've done all of them in the month
@@ -117,8 +123,8 @@ while ( $day_num <= $days_in_month )
 {
 
     echo "<div class='large-1 mainday'>$day_num";
-        if(array_key_exists($day_num, $allGigs)) {
-            echo "<br /><a>$allGigs[$day_num]</a>";
+        if(array_key_exists($day_num, $namesforcal)) {
+            echo "<br /><a href='/view/$idforcal[$day_num]'>$namesforcal[$day_num] <br />$datesforcal[$day_num]</a>";
         }
         echo "</div>";
 

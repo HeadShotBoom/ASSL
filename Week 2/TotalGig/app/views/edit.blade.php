@@ -42,7 +42,7 @@
     <br />
     <div class="small-12 medium-8 medium-push-2 columns">
         <label for="gig_date">Gig Date</label>
-        <input name="gig_date" type="text" data-date-time data-nullable />
+        <input name="gig_date" type="text" value="{{ $gig->gig_date }}" data-date-time data-nullable />
         @if($errors->has('gig_date'))
         <span class="error">{{ $errors->first('gig_date') }}</span>
         @endif
