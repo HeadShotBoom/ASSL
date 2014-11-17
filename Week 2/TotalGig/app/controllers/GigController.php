@@ -30,13 +30,14 @@ class GigController extends BaseController{
         $validator = Validator::make($data, $rules);
 
         if($validator->passes()){
-
-            $uploaddir = public_path() . '/uploads/';
-            $origionalfileName = pathinfo($uploaddir . ($_FILES['fileToUpload']['name']));
-            $newName = $origionalfileName['filename'] . str_random(25) . '.' . $origionalfileName['extension'];
-            $uploadfile = $uploaddir . $newName;
-            move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile);
-
+            if(! empty($_FILES['fileToUpload']['name'])) {
+                echo "Has File";
+                $uploaddir = public_path() . '/uploads/';
+                $origionalfileName = pathinfo($uploaddir . ($_FILES['fileToUpload']['name']));
+                $newName = $origionalfileName['filename'] . str_random(25) . '.' . $origionalfileName['extension'];
+                $uploadfile = $uploaddir . $newName;
+                move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile);
+            }else{$uploadfile = "Blank";}
 
             $gig = new Gig;
             $gig->gig_name = Input::get('gig_name');
@@ -47,7 +48,9 @@ class GigController extends BaseController{
             $gig->employee1 = Input::get('employee1');
             $gig->employee2 = Input::get('employee2');
             $gig->employee3 = Input::get('employee3');
-            $gig->file = $newName;
+            if(! empty($_FILES['fileToUpload']['name'])) {
+                $gig->file = $newName;
+            }
             $gig->save();
 
             if(Input::get('employee1') != null ){
@@ -55,20 +58,26 @@ class GigController extends BaseController{
                       Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('Youve Been Booked on '.Input::get('gig_date').'!!!');
-                        $message->attach($uploadfile);
+                          if(! empty($_FILES['fileToUpload']['name'])) {
+                              $message->attach($uploadfile);
+                          }
                     });
 
                 }elseif(Input::get('employee1') == 2){
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee1') == 3){
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('reneochoa44@gmail.com', 'Rene Ochoa')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                         });
                 }else{
 
@@ -80,19 +89,25 @@ class GigController extends BaseController{
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee2') == 2){
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee2') == 3){
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('reneochoa44@gmail.com', 'Rene Ochoa')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }else{
 
@@ -104,19 +119,25 @@ class GigController extends BaseController{
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee3') == 2){
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee3') == 3){
                     Mail::later(1, 'users.mails.gig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DCarroll@fullsail.edu', 'Daniel Carroll')->subject('Youve Been Booked');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }else{
 
@@ -152,16 +173,14 @@ class GigController extends BaseController{
 
         if($validator->passes()){
 
-            if(! empty($_FILES)){
-//                echo "file";
+            if(! empty($_FILES['fileToUpload']['name'])) {
                 $uploaddir = public_path() . '/uploads/';
                 $origionalfileName = pathinfo($uploaddir . ($_FILES['fileToUpload']['name']));
                 $newName = $origionalfileName['filename'] . str_random(25) . '.' . $origionalfileName['extension'];
                 $uploadfile = $uploaddir . $newName;
                 move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile);
             }else{
-//                echo "no file";
-                $newName = $gig->file;
+                $uploadfile = "blank";
             }
 
 
@@ -173,7 +192,9 @@ class GigController extends BaseController{
             $gig->employee1 = Input::get('employee1');
             $gig->employee2 = Input::get('employee2');
             $gig->employee3 = Input::get('employee3');
-            $gig->file = $newName;
+            if(! empty($_FILES['fileToUpload']['name'])) {
+                $gig->file = $newName;
+            }
             $gig->save();
 
             if(Input::get('employee1') != null ){
@@ -181,20 +202,26 @@ class GigController extends BaseController{
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
 
                 }elseif(Input::get('employee1') == 2){
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee1') == 3){
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('reneochoa44@gmail.com', 'Rene Ochoa')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }else{
 
@@ -206,19 +233,25 @@ class GigController extends BaseController{
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee2') == 2){
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee2') == 3){
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('reneochoa44@gmail.com', 'Rene Ochoa')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }else{
 
@@ -230,19 +263,25 @@ class GigController extends BaseController{
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DanCarrollPhotos@outlook.com', 'Daniel Carroll')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee3') == 2){
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('HeadShotBoom@live.com', 'Daniel Carroll')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }elseif(Input::get('employee3') == 3){
                     Mail::later(1, 'users.mails.editedgig', array('username'=>'Daniel', 'gig_name'=>Input::get('gig_name'), 'gig_date'=>Input::get('gig_date'), 'client_name'=>Input::get('client_name'), 'email'=>Input::get('email'), 'phone'=>Input::get('phone')), function($message) use ($uploadfile){
                         $message->from('DanCarrollPhotos@outlook.com', 'DanTheMan');
                         $message->to('DCarroll@fullsail.edu', 'Daniel Carroll')->subject('The details of the gig on '.Input::get('gig_date').' have changed!!!');
-                        $message->attach($uploadfile);
+                        if(! empty($_FILES['fileToUpload']['name'])) {
+                            $message->attach($uploadfile);
+                        }
                     });
                 }else{
 
@@ -279,4 +318,26 @@ class GigController extends BaseController{
         }
         return View::make('failure');
     }
+
+    public function calendar(){
+        if(Auth::check()){
+            $gig = Gig::all();
+            return View::make('calendar', compact('gig'));
+        }
+        return View::make('failure');
+
+    }
+
+    public function calendarmod($month, $year){
+        if(Auth::check()){
+            $gig = Gig::all();
+            $data['month'] = $month;
+            $data['year']= $year;
+            return View::make('calendar', compact('gig', $data));
+
+        }
+        return View::make('failure');
+
+    }
+
 }

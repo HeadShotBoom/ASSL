@@ -44,12 +44,10 @@
                 @endif
             </li>
             <li class="has-dropdown">
-                <a href="#">NAVIGATION PLACEHOLDER</a>
+                <a href="#">Change View</a>
                 <ul class="dropdown">
-                    <li><a href="#">First link in dropdown</a></li>
-                    <li class="active">
-                        <a href="#">Active link in dropdown</a>
-                    </li>
+                    <li><a href="{{action ('GigController@index') }}">List View</a></li>
+                    <li><a href="{{action ('GigController@calendar') }}">Calendar View</a></li>
                 </ul>
             </li>
         </ul> <!-- Left Nav Section -->

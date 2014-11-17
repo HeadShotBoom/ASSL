@@ -4,7 +4,11 @@
 
 <?php
 //This gets today's date
-
+//if(isset($_GET['month'])){
+//
+//    echo 'success';
+//    exit;
+//}
 $date =time () ;
 
 //This puts the day, month, and year in seperate variables
@@ -12,9 +16,26 @@ $date =time () ;
 $day = date('d', $date) ;
 
 $month = date('m', $date);
+if(isset($_GET['year'])){
+    $year = $_GET['year'];
+}else {
+    $year = date('Y', $date);
+}
+$splityear = str_split($year, 2);
+$shortyear = $splityear[1];
 
+if(isset($_GET['month'])) {
+    if($_GET['month']<13 && $_GET['month']>0) {
+        $month = $_GET['month'];
+    }elseif($_GET['month']==0){
+        $month = 12;
+        $year = $year-1;
+    }elseif($_GET['month'] == 13){
+        $month = 1;
+        $year = $year+1;
+    }
+}
 
-$year = date('Y', $date) ;
 
 
 
@@ -56,12 +77,21 @@ switch($day_of_week){
 //We then determine how many days are in the current month
 
 $days_in_month = cal_days_in_month(0, $month, $year) ;
-
 //Here we start building the table heads
 
+?>
+
+
+
+<br />
+<?php
 echo "<ul class='large-8 large-push-2 small-12 columns maincalendar'>";
 
-echo "<li class='title'> $title $year </li>";
+echo "<li class='title'>"; ?>
+<a class="floatleft" href="{{ action('GigController@calendar') }}?month=<?php echo $month-1 ?>&year=<?php echo $year ?>" >Prev</a>
+<?php echo $title . " " .  $year; ?>
+<a class="floatright" href="{{ action('GigController@calendar') }}?month=<?php echo $month+1 ?>&year=<?php echo $year ?>" >Next</a>
+<?php echo "</li>";
 echo "<li class='mainday-header' >
 <div class='large-1 mainday'>Sun</div>
         <div class='large-1 mainday'>Mon</div>
@@ -100,20 +130,22 @@ while ( $blank > 0 )
 $day_num = 1;
 
 $namesforcal = array();
-$datesforcal = array();
-$idforcal = array();
 
 foreach($gig as $gig){
     $gigdate = $gig->gig_date;
-    $strarr = str_split($gigdate, 2);
-    $gigday = $strarr[4];
+    $strarr = str_split($gigdate, 1);
+    $gigtimestamp = $strarr;
+    $gigminutes = $gigtimestamp[11].$gigtimestamp[12].$gigtimestamp[14].$gigtimestamp[15].$gigtimestamp[17].$gigtimestamp[18];
+    $gigday = $gigtimestamp[8].$gigtimestamp[9];
+    $gigmonth = $gigtimestamp[5].$gigtimestamp[6];
+    $gigyear = $gigtimestamp[2].$gigtimestamp[3];
+
     $giginfo = array();
     $giginfo[0] = $gig->gig_name;
-    $giginfo[1] = $gig->gig_date;
-    $giginfo[2] = $gig->id;
-    $namesforcal[intval($gigday)] = $giginfo[0];
-    $datesforcal[intval($gigday)] = $giginfo[1];
-    $idforcal[intval($gigday)] = $giginfo[2];
+    $giginfo[1] = $gig->id;
+    $namesforcal[intval($gigyear)][intval($gigmonth)][intval($gigday)][intval($gigminutes)][0] = $giginfo[0];
+    $namesforcal[intval($gigyear)][intval($gigmonth)][intval($gigday)][intval($gigminutes)][1] = $gigtimestamp[11].$gigtimestamp[12].$gigtimestamp[13].$gigtimestamp[14].$gigtimestamp[15];
+    $namesforcal[intval($gigyear)][intval($gigmonth)][intval($gigday)][intval($gigminutes)][2] = $giginfo[1];
 }
 
 //count up the days, untill we've done all of them in the month
@@ -123,8 +155,14 @@ while ( $day_num <= $days_in_month )
 {
 
     echo "<div class='large-1 mainday'>$day_num";
-        if(array_key_exists($day_num, $namesforcal)) {
-            echo "<br /><a href='/view/$idforcal[$day_num]'>$namesforcal[$day_num] <br />$datesforcal[$day_num]</a>";
+        if(isset($namesforcal[$shortyear])) {
+            if (isset($namesforcal[$shortyear][$month])) {
+                if(isset($namesforcal[$shortyear][$month][$day_num])) {
+                    foreach($namesforcal[$shortyear][$month][$day_num] as $thegigness){
+                        echo "<br /><a href='/view/$thegigness[2]' >$thegigness[0] @ $thegigness[1]</a><br />";
+                    }
+                }
+            }
         }
         echo "</div>";
 

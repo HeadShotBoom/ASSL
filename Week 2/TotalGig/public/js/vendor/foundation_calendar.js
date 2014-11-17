@@ -149,7 +149,7 @@ $.fcdp = {
 			utcOffset: utcOffset,
 			minDate: input.is('[data-min-date]') ? this.getDateFromString(input.data('min-date')) : null,
 			maxDate: input.is('[data-max-date]') ? this.getDateFromString(input.data('max-date')) : null,
-			fixed: input.is('[data-fixed]') ? true : false,
+			fixed: input.is('[data-fixed]') ? true : false
 		};
 		
 		// Incorporate the options that were passed in with the build call if they
@@ -216,7 +216,7 @@ $.fcdp = {
 			datePicker: hasDatePicker ? cal.find('.date-picker') : null,
 			timeSelector: hasTimePicker ? sel.find('.time-selector') : null,
 			timePicker: hasTimePicker ? cal.find('.time-picker') : null,
-			clearButton: opts.nullable ? cal.find('a.clear') : null,
+			clearButton: opts.nullable ? cal.find('a.clear') : null
 		});
 		
 		cal.data('opts', opts);
@@ -456,7 +456,7 @@ $.fcdp = {
 			var daysInPreviousMonth = this.daysInMonth(previousMonth);
 						
 			var header = $('<div class="header"></div>');
-			header.append('<a href="#" class="month-nav prev"><span></span</a>');
+			header.append('<a href="#" class="month-nav prev"><span></span></a>');
 			header.append('<a href="#" class="month-nav next"><span></span></a>');
 			header.append('<div class="month">' + workingDate.format('%B %Y') + '</div>');
 		

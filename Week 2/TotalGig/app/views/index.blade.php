@@ -35,6 +35,7 @@ if(Auth::check()){
         <th>Employee 2</th>
         <th>Employee 3</th>
         <th>Files</th>
+        <th>Contract</th>
         <th>Modify Gig</th>
     </tr>
     </thead>
@@ -50,6 +51,7 @@ if(Auth::check()){
         <td>{{ $gig->employee2 }}</td>
         <td>{{ $gig->employee3 }}</td>
         <td><a href="./uploads/{{$gig->file}}" >Click Here</td>
+        <td><a href="{{ action('PrintController@printgig', $gig->id) }}" class="btn btn-default">Export</a></td>
         <td><a href="{{ action('GigController@edit', $gig->id) }}" class="btn btn-default">Edit</a> <a href="{{ action('GigController@delete', $gig->id) }}" class="btn btn-default">Delete</a> </td>
     </tr>
     @endforeach

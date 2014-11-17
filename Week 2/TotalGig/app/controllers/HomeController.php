@@ -67,9 +67,4 @@ class HomeController extends BaseController {
         return View::make('logout');
     }
 
-    public function calendar(){
-        $gig = Gig::all();
-        return View::make('calendar', compact('gig'));
-    }
-
 }

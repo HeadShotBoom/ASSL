@@ -21,7 +21,9 @@ Route::get('/view/{gig}', 'GigController@viewgig');
 Route::get('/register', 'HomeController@register');
 Route::get('/login', 'HomeController@login');
 Route::get('/logout', 'HomeController@logout');
-Route::get('/calendar', 'HomeController@calendar');
+Route::get('/calendar', 'GigController@calendar');
+Route::get('/calendar/{month}/{year}', 'GigController@calendarmod');
+Route::get('/print/{gig}/pdf', 'PrintController@printgig');
 
 Route::post('/create', 'GigController@handleCreate');
 Route::post('/edit', 'GigController@handleEdit');
