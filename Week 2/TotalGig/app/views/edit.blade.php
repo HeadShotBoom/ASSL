@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="page-header">
-    <h1>Edit Gig</h1>
+    <div class="row">
+    <h1 class="small-12  medium-8 medium-push-2 columns">Edit Gig</h1>
+    </div>
 </div>
 
 <div class="row">

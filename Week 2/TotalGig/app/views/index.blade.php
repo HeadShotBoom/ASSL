@@ -8,12 +8,12 @@ if(Auth::check()){
 ?>
 @if(isset($userId))
 <div class="page-header">
-    <h1>All Gigs</h1>
+    <h1 class="pushright">All Gigs</h1>
 </div>
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <a href="{{ action('GigController@create') }}" class="btn btn-primary">Create Gig</a>
+        <a href="{{ action('GigController@create') }}" class="pushright btn btn-primary">Create Gig</a>
     </div>
 
     @if(Session::has('message'))
@@ -23,7 +23,8 @@ if(Auth::check()){
     @endif
 
 </div>
-<table class="table table-striped">
+
+<table class="centered table table-striped">
     <thead>
     <tr>
         <th>Gig Name</th>
@@ -52,7 +53,7 @@ if(Auth::check()){
         <td>{{ $gig->employee3 }}</td>
         <td><a href="./uploads/{{$gig->file}}" >Click Here</td>
         <td><a href="{{ action('PrintController@printgig', $gig->id) }}" class="btn btn-default">Export</a></td>
-        <td><a href="{{ action('GigController@edit', $gig->id) }}" class="btn btn-default">Edit</a> <a href="{{ action('GigController@delete', $gig->id) }}" class="btn btn-default">Delete</a> </td>
+        <td><a href="{{ action('GigController@edit', $gig->id) }}" class="btn btn-default">Edit</a> / <a href="{{ action('GigController@delete', $gig->id) }}" class="btn btn-default">Delete</a> </td>
     </tr>
     @endforeach
     @else

@@ -7,3 +7,9 @@
 .floatright{
     float:right;
 }
+.centered{
+    margin: 10px auto;
+}
+.pushright{
+    margin-left:100px;
+}
