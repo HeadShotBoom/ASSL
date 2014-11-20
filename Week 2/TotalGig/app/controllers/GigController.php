@@ -31,7 +31,6 @@ class GigController extends BaseController{
 
         if($validator->passes()){
             if(! empty($_FILES['fileToUpload']['name'])) {
-                echo "Has File";
                 $uploaddir = public_path() . '/uploads/';
                 $origionalfileName = pathinfo($uploaddir . ($_FILES['fileToUpload']['name']));
                 $newName = $origionalfileName['filename'] . str_random(25) . '.' . $origionalfileName['extension'];

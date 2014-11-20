@@ -3,12 +3,7 @@
 @section('content')
 
 <?php
-//This gets today's date
-//if(isset($_GET['month'])){
-//
-//    echo 'success';
-//    exit;
-//}
+
 $date =time () ;
 
 //This puts the day, month, and year in seperate variables

@@ -24,6 +24,13 @@
 @if($errors->has('password'))
 <span class="error">{{ $errors->first('password') }}</span>
 @endif
+
+{{ Form::label('password2', 'Verify Password') }}
+{{ Form::password('password2') }}
+
+@if($errors->has('password'))
+<span class="error">{{ $errors->first('password') }}</span>
+@endif
 {{ Form::submit('Submit') }}
 
 {{ Form::close() }}

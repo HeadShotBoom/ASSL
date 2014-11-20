@@ -25,7 +25,8 @@ class HomeController extends BaseController {
         $data = Input::all();
         $rules = array(
             'username' => 'alpha_num|min:3|required',
-            'password' => 'min:3|required',
+            'password' => 'min:3|required|same:password2',
+            'password2'=> 'min:3|required',
             'email' => 'email|required'
         );
 
